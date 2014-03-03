@@ -1,0 +1,70 @@
+#!/bin/sh
+
+
+# Default output
+unknown='Chase'
+no='<fc=#CD656C>Chase</fc>'
+yes='<fc=#32A679>Chase</fc>'
+fail=0
+
+# Custom output
+opt=0
+for arg in "$@"; do
+    if [ $opt = u ]; then
+	unknown="${arg}"
+	opt=0
+    elif [ $opt = n ]; then
+	no="${arg}"
+	opt=0
+    elif [ $opt = y ]; then
+	yes="${arg}"
+	opt=0
+    elif [ "${arg}" = "-u" ]; then
+	opt=u
+    elif [ "${arg}" = "-n" ]; then
+	opt=n
+    elif [ "${arg}" = "-y" ]; then
+	opt=y
+    elif [ "${arg}" = "-f" ]; then
+	fail=1
+    elif [ "${arg}" = "+f" ]; then
+	fail=0
+    elif [ "${arg}" = "-h" ]; then
+	no='No'
+	yes='Yes!'
+	unknown='Failed to download information'
+	fail=1
+    else
+	echo 'OPTIONS:'
+	echo ''
+	echo '  -u OUTPUT    Output if unknown, cannot download information'
+	echo '  -n OUTPUT    Output on sad state'
+	echo '  -y OUTPUT    Output on happy state'
+	echo '  -f           Fail with exit value 1 if unknown'
+	echo '  +f           Fail with exit value 0 if unknown'
+	echo '  -h           Configure for use in terminal or for a script'
+	echo '               instead of for xmobar'
+	exit 0
+    fi
+done
+
+# Read website
+page="$(wget http://www.doeschasehaveajobyet.com -O - 2>/dev/null)"
+
+if [ ! $? = 0 ]; then
+    # Failed to download website
+    echo "${unknown}"
+    if [ $fail = 1 ]; then
+	exit 1
+    fi
+fi
+
+# Parse website
+if [ $(echo "${page}" | grep NO | grep -v NOVEMBER | wc -l) = 1 ]; then
+    # ☹
+    echo "${no}"
+else
+    # ☺
+    echo "${yes}"
+fi
+
