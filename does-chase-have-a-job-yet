@@ -61,9 +61,7 @@ page="$(wget http://www.doeschasehaveajobyet.com -O - 2>/dev/null)"
 if [ ! $? = 0 ]; then
     # Failed to download website
     echo "${unknown}"
-    if [ $fail = 1 ]; then
-	exit 1
-    fi
+    exit $fail
 fi
 
 # Parse website
