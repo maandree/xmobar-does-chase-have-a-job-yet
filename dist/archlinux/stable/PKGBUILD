@@ -10,7 +10,7 @@ license=('custom:GNUAllPermissive')
 depends=(wget sh grep coreutils)
 makedepends=(make coreutils)
 source=($url/archive/$pkgver.tar.gz)
-sha256sums=('46f543be47b424ab44a2ff0fca63c2f07081eac2291733659a0a560b88e412c5')
+sha256sums=('45fb5e8ceb0a40a5e3a60bfbd8e0b2f17ed1d7153f6a832457a1e649edae4d85')
 
 
 package() {
