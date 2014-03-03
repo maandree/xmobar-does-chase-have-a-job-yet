@@ -1,0 +1,20 @@
+# Maintainer: Mattias Andrée <`base64 -d`(bWFhbmRyZWUK)@member.fsf.org>
+
+pkgname=xmobar-does-chase-have-a-job-yet
+pkgver=1
+pkgrel=1
+pkgdesc="doeschasehaveajobyet.com as an xmobar monitor"
+arch=(i686 x86_64)
+url="https://github.com/maandree/xmobar-does-chase-have-a-job-yet"
+license=('custom:GNUAllPermissive')
+depends=(wget sh grep coreutils)
+makedepends=(make coreutils)
+source=($url/archive/$pkgver.tar.gz)
+sha256sums=('46f543be47b424ab44a2ff0fca63c2f07081eac2291733659a0a560b88e412c5')
+
+
+package() {
+  cd "$srcdir/$pkgname-$pkgver"
+  make PREFIX=/usr install DESTDIR="$pkgdir"
+}
+

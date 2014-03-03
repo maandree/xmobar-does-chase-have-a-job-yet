@@ -8,4 +8,7 @@ obj/
 *.swo
 *.swp
 *.bak
+/dist/*/*/*
+!/dist/*/*/PKGBUILD
+!/dist/*/*/xmobar-does-chase-have-a-job-yet.install
 
