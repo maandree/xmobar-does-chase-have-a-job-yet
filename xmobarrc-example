@@ -13,7 +13,7 @@ Config { font = "-misc-fixed-*-*-*-*-10-*-*-*-*-*-*-*"
        , lowerOnStart = True
 
        --  Here is how you define the Chase monitor
-       , commands = [ Run Com "sh" [ "-c", "does-chase-have-a-job-yet" ] "chase" 72000
+       , commands = [ Run Com "does-chase-have-a-job-yet" [] "chase" 72000
                       --  `does-chase-have-a-job-yet` is the command
                       --  `chase` is the name of the monitor, used in `template`
                       --  `72000` is the update interval in tenths of seconds, 72000 is two hours
